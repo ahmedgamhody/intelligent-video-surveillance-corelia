@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+venv/
+
+# Node.js
+node_modules/
+package-lock.json
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# Other
+static/
+.env
+.secrets
+.toml

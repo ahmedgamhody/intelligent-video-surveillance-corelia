@@ -1,0 +1,1 @@
+from .channel_schema import Channel

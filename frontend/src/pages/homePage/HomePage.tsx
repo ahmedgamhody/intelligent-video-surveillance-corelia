@@ -38,13 +38,14 @@ export default function HomePage({
         return "grid-cols-3";
     }
   };
-
+// `ws://10.100.102.6:2345/ivs/v5/streamer/connect_channel?channel_name=${selectedChannel}`
   useEffect(() => {
     let socket: WebSocket | null = null;
 
     if (selectedChannel) {
       socket = new WebSocket(
         `ws://10.100.102.6:2345/ivs/v5/predictor/connect_channel?channel_name=${selectedChannel}`
+        
       );
       socket.onmessage = (event) => {
         const res: IWSResponse[] = JSON.parse(event.data);

@@ -1,0 +1,9 @@
+uvicorn
+fastapi
+pydantic
+pydantic_settings
+python-multipart
+
+asyncpg
+sqlalchemy
+bcrypt

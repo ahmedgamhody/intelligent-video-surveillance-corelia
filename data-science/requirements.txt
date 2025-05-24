@@ -1,0 +1,24 @@
+# fastapi packages:
+uvicorn
+fastapi
+pydantic
+pydantic_settings
+python-multipart
+websockets
+
+# services packages:
+ultralytics
+boxmot
+yt_dlp
+tensorrt
+onnx
+onnxslim
+onnxruntime
+onnxruntime-gpu
+openvino-dev
+
+# data-storage
+asyncpg
+kafka-python
+aiokafka
+psycopg2-binary

@@ -12,24 +12,26 @@ const toggleItems: {
   type: "boolean" | "number";
   space?: boolean;
 }[] = [
-  { label: "Source name", name: "sourceName", type: "boolean" },
-  { label: "Date-Time", name: "dateTime", type: "boolean" },
-  { label: "Frames rate", name: "framesRate", type: "boolean" },
-  { label: "Classes Counts", name: "classesCount", type: "boolean" },
-  {
-    label: "Classes Summations",
-    name: "classesSummations",
-    type: "number",
-    space: true,
-  },
-  { label: "Boxes", name: "boxes", type: "boolean" },
+  { label: "Source name", name: "sourceName", type: "boolean"},
+  { label: "Date-Time", name: "dateTime", type: "boolean"},
+  { label: "Frames rate", name: "framesRate", type: "boolean", space: true},
+  
+  { label: "Classes Counts", name: "classesCount", type: "boolean"},
+  { label: "Classes Summations", name: "classesSummations", type: "boolean", space: true},
+
   { label: "Classes", name: "classes", type: "boolean" },
-  { label: "Tracking IDs", name: "trackingIds", type: "boolean", space: true },
-  { label: "Masks", name: "masks", type: "boolean" },
-  { label: "Keypoints", name: "keypoints", type: "boolean", space: true },
-  { label: "Confidence", name: "confidence", type: "boolean", space: true },
-  { label: "Tracking Lines", name: "trackingLines", type: "number" },
-  { label: "Heat Map", name: "heatMap", type: "number" },
+  { label: "Tracking IDs", name: "trackingIds", type: "boolean"},
+  { label: "Objects Durations", name: "objectsDurations", type: "boolean", space: true},
+  
+  { label: "Boxes", name: "boxes", type: "boolean"},
+  { label: "Masks", name: "masks", type: "boolean"},
+  { label: "Keypoints", name: "keypoints", type: "boolean", space: true},
+
+  { label: "Confidence", name: "confidence", type: "boolean", space: true},
+
+  { label: "Tracking Lines", name: "trackingLines", type: "boolean"},
+  { label: "Heat Map", name: "heatMap", type: "boolean" },
+  { label: "Blur", name: "blur", type: "boolean"}
 ];
 
 export default function PlotsSideBar({
@@ -80,6 +82,20 @@ export default function PlotsSideBar({
                 }
               />
               <Settings className=" cursor-pointer" />
+              <input
+                type="number"
+                min={0}
+                disabled={!plotsConditions.plots}
+                placeholder="0"
+                
+                className={`border border-gray-300 rounded px-2 py-1 text-sm w-11
+                ${
+                  plotsConditions.plots
+                    ? "bg-white"
+                    : "bg-gray-200 opacity-50 cursor-not-allowed"
+                }
+                `}
+              />
             </div>
             <div className="grid grid-cols-1 gap-2 flex-1">
               {toggleItems?.map((item) =>
@@ -107,26 +123,6 @@ export default function PlotsSideBar({
                       <label className="text-sm font-medium">
                         {item.label}
                       </label>
-                      <input
-                        type="number"
-                        min={0}
-                        value={plotsConditions[item.name] as number}
-                        disabled={!plotsConditions.plots}
-                        placeholder="1"
-                        onChange={(e) =>
-                          setPlotsConditions((prev) => ({
-                            ...prev,
-                            [item.name]: Number(e.target.value),
-                          }))
-                        }
-                        className={`border border-gray-300 rounded px-2 py-1 text-sm w-11
-                        ${
-                          plotsConditions.plots
-                            ? "bg-white"
-                            : "bg-gray-200 opacity-50 cursor-not-allowed"
-                        }
-                        `}
-                      />
                     </div>
                     {item.space && <hr className="border-t border-gray-400" />}
                   </div>

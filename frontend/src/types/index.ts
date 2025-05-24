@@ -17,20 +17,28 @@ export type TModalType = {
 
 export type PlotsConditionsType = {
   plots: boolean;
+  
   sourceName: boolean;
+  dateTime: boolean;
+  framesRate: boolean;
+  
+  classesCount: boolean;
+  classesSummations: boolean;
+
+  classes: boolean;
+  trackingIds: boolean;
+  objectsDurations: boolean;
+
   boxes: boolean;
   masks: boolean;
-  classes: boolean;
-  confidence: boolean;
   keypoints: boolean;
-  timestamp: boolean;
-  classesCount: boolean;
-  framesRate: boolean;
-  trackingIds: boolean;
-  dateTime: boolean;
-  classesSummations: number | boolean;
-  trackingLines: number | boolean;
-  heatMap: number | boolean;
+
+  confidence: boolean;
+
+  // timestamp: boolean;
+  trackingLines: boolean;
+  heatMap: boolean;
+  blur: boolean;
 };
 
 export type PlotsConditionsProps = {

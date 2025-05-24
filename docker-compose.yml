@@ -1,0 +1,57 @@
+services:
+  ivs_system_db:
+    image: postgres:latest
+    container_name: ivs_system_db
+    ports:
+      - "${IVS_SYSTEM_DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: ${IVS_SYSTEM_DB_NAME}
+      POSTGRES_USER: ${IVS_SYSTEM_DB_USER}
+      POSTGRES_PASSWORD: ${IVS_SYSTEM_DB_PASS}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  ivs_service_db:
+    image: timescale/timescaledb:latest-pg17
+    container_name: ivs_service_db
+    ports:
+      - "${IVS_SERVICE_DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: ${IVS_SERVICE_DB_NAME}
+      POSTGRES_USER: ${IVS_SERVICE_DB_USER}
+      POSTGRES_PASSWORD: ${IVS_SERVICE_DB_PASS}
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  ivs_kafka:
+    image: apache/kafka-native:latest
+    container_name: ivs_kafka
+    ports:
+      - "${IVS_KAFKA_PORT}:9093"
+    environment:
+      KAFKA_LISTENERS: CONTROLLER://localhost:9091,BROKER://0.0.0.0:9092,HOST://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: BROKER://ivs_kafka:9092,HOST://localhost:${IVS_KAFKA_PORT}
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,HOST:PLAINTEXT
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: controller,broker
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9091
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - kafka_data:/opt/kafka/logs
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+  timescale_data:
+  kafka_data:
+
+networks:
+  app_network:
+    driver: bridge
