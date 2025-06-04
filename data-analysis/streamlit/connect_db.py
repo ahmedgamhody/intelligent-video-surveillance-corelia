@@ -5,13 +5,15 @@ import os
 from dotenv import load_dotenv
 
 # Load from .env
-load_dotenv("../../../.env")  # Adjust path
+load_dotenv("../../.env")
 
 # Now use them like:
 db_user = os.getenv("IVS_SERVICE_DB_USER")
 db_pass = os.getenv("IVS_SERVICE_DB_PASS")
 db_port = os.getenv("IVS_SERVICE_DB_PORT")
 db_name = os.getenv("IVS_SERVICE_DB_NAME")
+
+print(f"postgresql+psycopg2://{db_user}:{db_pass}@localhost:{db_port}/{db_name}")
 
 
 def load_data():
