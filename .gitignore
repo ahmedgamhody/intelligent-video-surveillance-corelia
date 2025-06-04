@@ -13,7 +13,7 @@ package-lock.json
 
 # Other
 static/
-.env
-.secrets
-.toml
-.out
+*.env
+*.secrets
+*.toml
+*.out
