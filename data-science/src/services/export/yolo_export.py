@@ -1,8 +1,9 @@
 from ultralytics import YOLO
 import os
 import shutil
-from config import NUM_PATCHES
+# from config import NUM_PATCHES
 
+NUM_PATCHES = 16
 
 class ExportYolo:
     def __init__(self, model_path, model_name=None):
@@ -10,6 +11,7 @@ class ExportYolo:
         self.model = YOLO(model_path)
 
         self.model_name = os.path.splitext(os.path.basename(model_path))[0]
+        print(self.model_name, model_name)
         if model_name:
             os.rename(model_path, model_path.replace(self.model_name, model_name))
             print(f"Model Renamed: {self.model_name} -> {model_name}")
@@ -57,42 +59,46 @@ class ExportYolo:
 if __name__ == "__main__":
     src_dir = "./static/models/pt/"
 
-    # models = sorted(os.listdir(src_dir), key=lambda f: os.path.getsize(os.path.join(src_dir, f)))
+    models = sorted(os.listdir(src_dir), key=lambda f: os.path.getsize(os.path.join(src_dir, f)))
 
-    models = ['yolov8n.pt', 'yolov8n-seg.pt', 'yolov8n-pose.pt']
-        # ['yolov8n.pt', 'yolov8s.pt', 'yolov8m.pt', 'yolov8l.pt', 'yolov8x.pt',
-        # 'yolov8n-seg.pt', 'yolov8s-seg.pt', 'yolov8m-seg.pt', 'yolov8l-seg.pt', 'yolov8x-seg.pt',
-        # 'yolov8n-pose.pt', 'yolov8s-pose.pt', 'yolov8m-pose.pt', 'yolov8l-pose.pt', 'yolov8x-pose.pt']
+    # models = [
+    #     'yolo11n.pt', 'yolo11n-seg.pt', 'yolo11n-pose.pt',
+    #     'yolo11s.pt', 'yolo11s-seg.pt', 'yolo11s-pose.pt',
+    #     'yolo11m.pt', 'yolo11m-seg.pt', 'yolo11m-pose.pt',
+    #     'yolo11l.pt', 'yolo11l-seg.pt', 'yolo11l-pose.pt',
+    #     'yolo11x.pt', 'yolo11x-seg.pt', 'yolo11x-pose.pt'
+    #     ]
+
     models = [src_dir + model for model in models]
-    
+
     # Define the mapping from old names to new names
     name_mapping = {
         # Detection models
-        'yolov8n': 'Default detection nano',
-        'yolov8s': 'Default detection small',
-        'yolov8m': 'Default detection medium',
-        'yolov8l': 'Default detection large',
-        'yolov8x': 'Default detection x-large',
+        'yolo11n': 'Default detection nano',
+        'yolo11s': 'Default detection small',
+        'yolo11m': 'Default detection medium',
+        'yolo11l': 'Default detection large',
+        'yolo11x': 'Default detection x-large',
         
         # Segmentation models
-        'yolov8n-seg': 'Default segmentation nano',
-        'yolov8s-seg': 'Default segmentation small',
-        'yolov8m-seg': 'Default segmentation medium',
-        'yolov8l-seg': 'Default segmentation large',
-        'yolov8x-seg': 'Default segmentation x-large',
+        'yolo11n-seg': 'Default segmentation nano',
+        'yolo11s-seg': 'Default segmentation small',
+        'yolo11m-seg': 'Default segmentation medium',
+        'yolo11l-seg': 'Default segmentation large',
+        'yolo11x-seg': 'Default segmentation x-large',
         
         # Positioning models
-        'yolov8n-pose': 'Pose estimation nano',
-        'yolov8s-pose': 'Pose estimation small',
-        'yolov8m-pose': 'Pose estimation medium',
-        'yolov8l-pose': 'Pose estimation large',
-        'yolov8x-pose': 'Pose estimation x-large',
+        'yolo11n-pose': 'Pose estimation nano',
+        'yolo11s-pose': 'Pose estimation small',
+        'yolo11m-pose': 'Pose estimation medium',
+        'yolo11l-pose': 'Pose estimation large',
+        'yolo11x-pose': 'Pose estimation x-large',
     }
 
     print(models)
     for filename in models:
         if filename.endswith('.pt'):
-            exporter = ExportYolo(src_dir + filename, model_name=name_mapping.get(filename.split('.')[0]))
+            exporter = ExportYolo(filename, model_name=name_mapping.get(os.path.splitext(os.path.basename(filename))[0]))
             exporter.export_to('gpu_cpu')
             # exporter.export_to('cpu')
             # exporter.export_to('mobile')

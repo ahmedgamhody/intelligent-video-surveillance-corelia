@@ -1,0 +1,25 @@
+
+> test@0.0.0 dev
+> vite --host 0.0.0.0 --port 1234
+
+
+  VITE v5.4.14  ready in 232 ms
+
+  ➜  Local:   http://localhost:1234/
+  ➜  Network: http://10.100.102.6:1234/
+  ➜  Network: http://172.23.0.1:1234/
+  ➜  Network: http://192.168.0.1:1234/
+  ➜  Network: http://172.30.0.1:1234/
+  ➜  Network: http://172.28.0.1:1234/
+  ➜  Network: http://172.18.0.1:1234/
+  ➜  Network: http://172.22.0.1:1234/
+  ➜  Network: http://172.29.0.1:1234/
+  ➜  Network: http://172.19.0.1:1234/
+  ➜  Network: http://172.17.0.1:1234/
+  ➜  Network: http://192.168.144.1:1234/
+  ➜  Network: http://172.25.0.1:1234/
+  ➜  Network: http://172.31.0.1:1234/
+  ➜  Network: http://172.27.0.1:1234/
+Browserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme

@@ -4,30 +4,19 @@ import { PlotsConditionsType } from "../../types";
 import SourceSkeleton from "../../ui/skeletons/SourceSkeleton";
 
 export default function LiveStreaming() {
-  const [loading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [plotsConditions, setPlotsConditions] = useState<PlotsConditionsType>({
-  plots: true,
-  
-  sourceName: true,
-  dateTime: true,
-  framesRate: true,
-  
-  classesCount: true,
-  classesSummations: true,
-
-  classes: true,
-  trackingIds: true,
-  objectsDurations: true,
-
-  boxes: true,
-  masks: true,
-  keypoints: true,
-
-  confidence: true,
-
-  trackingLines: true,
-  heatMap: true,
-  blur: true,
+    plots: true,
+    sourceName: true,
+    boxes: true,
+    masks: true,
+    classes: true,
+    confidence: true,
+    keypoints: true,
+    timestamp: true,
+    className: true,
+    framesRate: true,
+    trackingIds: true,
   });
   // console.log("plotsConditions", plotsConditions);
   return (

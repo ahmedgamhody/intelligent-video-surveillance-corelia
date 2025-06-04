@@ -35,6 +35,7 @@ export type PlotsConditionsType = {
 
   confidence: boolean;
 
+  // timestamp: boolean;
   trackingLines: boolean;
   heatMap: boolean;
   blur: boolean;

@@ -114,7 +114,6 @@ async def get_channel(channel_name: str = Form(...), start: float = Form(...), e
 async def connect_channel(websocket: WebSocket, channel_name: str):
     if channel_name not in channels.keys():
         raise HTTPException(status_code=500, detail=f"Channel name {channel_name} is not exist!")
-    
     async def receive():
         try:
             while channel_name in channels.keys():

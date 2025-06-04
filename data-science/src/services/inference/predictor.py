@@ -211,6 +211,7 @@ if __name__ == '__main__':
         "https:/Youtube/Gr0HpDM8Ki8": "https://youtu.be/Gr0HpDM8Ki8",
         "https:/Youtube/wqctLW0Hb_0": "https://youtu.be/wqctLW0Hb_0",
         # "rtsp:/Channel/201": "rtsp://admin:Meapal55@10.100.103.5:554/Streaming/Channels/201"
+        # "http://THETAYN20102774:20102774@10.100.111.108/osc/commands/execute"
     },
     models={
         "Default": {

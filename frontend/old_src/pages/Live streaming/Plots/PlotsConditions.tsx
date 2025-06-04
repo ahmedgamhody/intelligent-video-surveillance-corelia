@@ -4,25 +4,15 @@ import PlotToggle from "./PlotToggle";
 
 const toggleItems: { label: string; name: keyof PlotsConditionsType }[] = [
   { label: "Source name", name: "sourceName" },
-  { label: "Date & Time", name: "dateTime" },
-  { label: "Frames Rate", name: "framesRate" },
-
-  { label: "Classes Count", name: "classesCount" },
-  { label: "Classes Summations", name: "classesSummations" },
-
-  { label: "Classes", name: "classes" },
-  { label: "Tracking IDs", name: "trackingIds" },
-  { label: "Objects Durations", name: "objectsDurations" },
-
   { label: "Boxes", name: "boxes" },
   { label: "Masks", name: "masks" },
-  { label: "Keypoints", name: "keypoints" },
-
+  { label: "Classes", name: "classes" },
   { label: "Confidence", name: "confidence" },
-
-  { label: "Tracking Lines", name: "trackingLines" },
-  { label: "Heat Map", name: "heatMap" },
-  { label: "Blur", name: "blur" },
+  { label: "Keypoints", name: "keypoints" },
+  { label: "Timestamp", name: "timestamp" },
+  { label: "Class name", name: "className" },
+  { label: "Frames rate", name: "framesRate" },
+  { label: "Tracking IDs", name: "trackingIds" },
 ];
 
 export default function PlotsConditions({

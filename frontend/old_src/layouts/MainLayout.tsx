@@ -11,28 +11,21 @@ import HomePage from "../pages/homePage/HomePage";
 
 export default function MainLayout() {
   const [plotsConditions, setPlotsConditions] = useState<PlotsConditionsType>({
-  plots: true,
-  
-  sourceName: true,
-  dateTime: true,
-  framesRate: true,
-  
-  classesCount: true,
-  classesSummations: true,
-
-  classes: true,
-  trackingIds: true,
-  objectsDurations: true,
-
-  boxes: true,
-  masks: true,
-  keypoints: true,
-
-  confidence: true,
-
-  trackingLines: true,
-  heatMap: true,
-  blur: true,
+    plots: true,
+    sourceName: true,
+    boxes: true,
+    masks: true,
+    classes: true,
+    confidence: false,
+    keypoints: true,
+    timestamp: true,
+    classesCount: true,
+    framesRate: true,
+    trackingIds: true,
+    dateTime: true,
+    classesSummations: 1,
+    trackingLines: 1,
+    heatMap: 1,
   });
 
   const { isChannelsSidebarOpen, isPlotsSidebarOpen } = useAppSelector(
