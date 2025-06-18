@@ -1,14 +1,52 @@
 import { CirclePause, FilePenLine } from "lucide-react";
-import { useAppSelector } from "../../store/hooks";
-// import {
-//   Accordion,
-//   AccordionContent,
-//   AccordionPanel,
-//   AccordionTitle,
-// } from "flowbite-react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import {
+  addChannelToPaused,
+  setSelectedChannel,
+} from "../../store/channel/channelSlice";
+import MoveToEndSectionIconAction from "../actions/MoveToEndSectionIconAction";
+import Swal from "sweetalert2";
+import { pauseChannel } from "../../utils/api";
 
 export default function LiveChannels() {
-  const { LiveChannels } = useAppSelector((state) => state.channels);
+  const { LiveChannels, selectedChannel } = useAppSelector(
+    (state) => state.channels
+  );
+  const dispatch = useAppDispatch();
+  const handlePauseChannel = async (channel: string) => {
+    Swal.fire({
+      title: "Do you want to Pause this Channel?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#49CC95",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, pause it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await pauseChannel(channel);
+
+          if (selectedChannel === channel) {
+            dispatch(setSelectedChannel(""));
+          }
+
+          dispatch(addChannelToPaused(channel));
+          Swal.fire({
+            title: "Paused!",
+            text: "Your Channel has been paused.",
+            icon: "success",
+          });
+        } catch (error) {
+          console.error("Error pausing channel:", error);
+          Swal.fire({
+            title: "Error!",
+            text: "Failed to pause the Channel. Please try again.",
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <div className="px-1">
@@ -18,60 +56,23 @@ export default function LiveChannels() {
           <li
             className="mb-2  p-2 rounded-lg flex justify-between items-center  cursor-pointer  hover:bg-gray-300 duration-150"
             key={index}
-            // onClick={() => {
-            //   dispatch(setSelectedChannel(channel));
-            //   dispatch(setIsPlayingTrue());
-            //   nav("/video-archive");
-            // }}
+            onClick={() => {
+              dispatch(setSelectedChannel(channel));
+            }}
           >
             <p>{channel}</p>
             <div className="flex gap-2 ">
-              <CirclePause size={18} />
               <FilePenLine size={18} />
+              <CirclePause
+                size={18}
+                onClick={() => handlePauseChannel(channel)}
+              />
+              <MoveToEndSectionIconAction channel={channel} />
             </div>
           </li>
         ))}
       </ul>
-      {/* <Accordion
-        theme={{
-          title: {
-            arrow: {
-              base: "p-1",
-            },
-            base: "flex w-full items-center justify-between p-5 text-left font-medium text-gray-500 first:rounded-t-lg last:rounded-b-lg dark:text-gray-400",
-          },
-          content: {
-            base: "p-2",
-          },
-        }}
-      >
-        <AccordionPanel>
-          <AccordionTitle className="text-l font-bold mb-2 text-secondary">
-            Live
-          </AccordionTitle>
-          <AccordionContent>
-            <ul>
-              {LiveChannels?.map((channel, index) => (
-                <li
-                  className="mb-2 bg-gray-200 p-2 rounded-lg flex justify-between items-center  cursor-pointer  hover:bg-gray-300 duration-150"
-                  key={index}
-                  // onClick={() => {
-                  //   dispatch(setSelectedChannel(channel));
-                  //   dispatch(setIsPlayingTrue());
-                  //   nav("/video-archive");
-                  // }}
-                >
-                  <p>{channel}</p>
-                  <div className="flex gap-2 ">
-                    <CirclePause size={18} />
-                    <FilePenLine size={18} />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </AccordionContent>
-        </AccordionPanel>
-      </Accordion> */}
+
       {LiveChannels?.length === 0 && (
         <p className="text-center">No Live Channels</p>
       )}

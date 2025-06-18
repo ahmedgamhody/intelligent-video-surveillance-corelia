@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { IFrameData } from "../../interfaces";
 import { PlotsConditionsType } from "../../types";
 
@@ -7,24 +7,24 @@ export default function FrameItem({
   plotsConditions,
 }: {
   frame: IFrameData;
-  plotsConditions: PlotsConditionsType;
+  plotsConditions?: PlotsConditionsType;
 }) {
   const containerRef = useRef(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  // const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (containerRef.current) {
-        const { offsetWidth, offsetHeight } = containerRef.current;
-        setDimensions({ width: offsetWidth, height: offsetHeight });
-      }
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (containerRef.current) {
+  //       const { offsetWidth, offsetHeight } = containerRef.current;
+  //       setDimensions({ width: offsetWidth, height: offsetHeight });
+  //     }
+  //   };
+  //   handleResize();
+  //   window.addEventListener("resize", handleResize);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
-  const originalSize = 640;
+  // const originalSize = 640;
 
   return (
     <div className="bg-white rounded shadow p-2">
@@ -41,7 +41,7 @@ export default function FrameItem({
           alt="frame"
           className="w-full h-full object-cover rounded"
         />
-        {dimensions.width > 0 &&
+        {/* {dimensions.width > 0 &&
           plotsConditions?.boxes &&
           frame?.boxes?.map((box, i) => {
             const [x1, y1, x2, y2, confidence, label] = box;
@@ -67,7 +67,7 @@ export default function FrameItem({
                 )}
               </div>
             );
-          })}
+          })} */}
       </div>
     </div>
   );

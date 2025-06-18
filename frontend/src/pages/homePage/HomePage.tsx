@@ -22,7 +22,7 @@ import { PlotsConditionsType } from "../../types";
 export default function HomePage({
   plotsConditions,
 }: {
-  plotsConditions: PlotsConditionsType;
+  plotsConditions?: PlotsConditionsType;
 }) {
   const [itemsPerRow, setItemsPerRow] = useState(3);
   const [frames, setFrames] = useState<IFrameData[]>([]);
@@ -40,7 +40,7 @@ export default function HomePage({
   };
   useEffect(() => {
     let socket: WebSocket | null = null;
-
+    console.log("Selected Channel:", selectedChannel);
     if (selectedChannel) {
       socket = new WebSocket(
         `${import.meta.env.VITE_API_URL_SOCKET}?channel_name=${selectedChannel}`
@@ -53,10 +53,12 @@ export default function HomePage({
       };
       socket.onclose = () => {
         console.log("WebSocket closed");
+        setFrames([]);
       };
     }
     return () => {
       socket?.close();
+      setFrames([]);
     };
   }, [selectedChannel]);
 
@@ -94,7 +96,7 @@ export default function HomePage({
                       : ""
                   }
                 >
-                  <FrameItem frame={frame} plotsConditions={plotsConditions} />
+                  <FrameItem frame={frame} plotsConditions={plotsConditions!} />
                 </div>
               ))}
         </div>

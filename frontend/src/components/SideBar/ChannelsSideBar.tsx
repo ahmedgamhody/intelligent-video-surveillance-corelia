@@ -7,7 +7,7 @@ import AddChannelModal from "../Modal/AddChannelModal";
 import { closeChannelsSidebar } from "../../store/ui/uiSlice";
 import LiveChannels from "../channels/LiveChannels";
 import PausedChannels from "../channels/PausedChannels";
-import EndedChannels from "./EndedChannels";
+import EndedChannels from "../channels/EndedChannels";
 
 export function ChannelsSideBar() {
   const [openModal, setOpenModal] = useState(false);
