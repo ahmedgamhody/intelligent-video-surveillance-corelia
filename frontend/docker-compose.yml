@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  
+  client:
+    image: ${HUB_URL}/${APP_NAME_FRONTEND}:${APP_VERSION}
+    ports:
+      - ${REACT_PORT:-3000}:80
+    env_file: 
+      - .env
+    environment:
+      - VITE_BACKEND_BASE_URL=${VITE_BACKEND_BASE_URL}

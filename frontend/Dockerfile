@@ -1,5 +1,5 @@
 # pull official base image (latest stable image [lts])
-FROM node:16.13.1 AS builder 
+FROM node:latest AS builder 
 
 # set working directory
 WORKDIR /app
@@ -25,7 +25,7 @@ WORKDIR /usr/share/nginx/html
 # Remove default nginx static resources
 RUN rm -rf ./*
 # Copies static resources from builder stage
-COPY --from=builder /app/build .
+COPY --from=builder /app/dist .
 # Containers run nginx with global directives and daemon off
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 

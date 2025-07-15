@@ -1,8 +1,12 @@
-include ../.env
-export $(shell sed 's/=.*//' ../.env)
+include .env
+export $(shell sed 's/=.*//' .env)
+
+clean:
 
 build:
-	docker build -t $(HUB_URL)/$(APP_NAME)/frontend:$(FRONTEND_VERSION) .
+	@docker image rm --force $(HUB_URL)/$(APP_NAME):$(APP_VERSION) || true
+	@docker build -t ${HUB_URL}/$(APP_NAME):$(APP_VERSION) --build-arg VERSION=$(IMAGE_VERSION) .
 
 publish:
-	docker push $(HUB_URL)/$(APP_NAME)/frontend:$(FRONTEND_VERSION)
+	@docker login ${HUB_URL}
+	@docker push ${HUB_URL}/$(APP_NAME):$(APP_VERSION)
