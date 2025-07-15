@@ -146,6 +146,23 @@ export default function AddChannelModal({ openModal, setOpenModal }: any) {
 
   const submitHandler = async () => {
     const FinalFormData = new FormData();
+
+    //   const fieldMapping = {
+    //   name: "channel_name",
+    //   realTimeMode: "realtime_mode",
+    //   confidence: "confidence_threshold",
+    //   overlapping: "overlapping_threshold",
+    //   tracking: "tracking",
+    //   withReId: "reid",
+    //   augment: "augmentation_mode",
+    // };
+
+    // Object.entries(formData).forEach(([key, value]) => {
+    //   if (fieldMapping[key]) {
+    //     FinalFormData.append(fieldMapping[key], String(value));
+    //   }
+    // });
+
     FinalFormData.append("channel_name", formData.name || "");
     FinalFormData.append("realtime_mode", String(formData.realTimeMode));
     FinalFormData.append(
